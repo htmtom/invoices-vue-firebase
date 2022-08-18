@@ -4,6 +4,7 @@
     --main-space: #252945;
     --main-form : #414776;
     --main-text: white;
+    --main-label: white;
     --dark-purple: #252945;
     --light-red: #ec5757;  
     --purple: #7c5dfa;
@@ -31,8 +32,9 @@ body{
 
 body.light{
   --main-space: #f3f8f8;
-  --main-form : #d5d5d5;
+  --main-form : #e8e7e7;
   --main-text: #252945;
+  --main-label: rgb(134, 134, 134);
 }
 
 button,

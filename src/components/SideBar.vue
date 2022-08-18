@@ -46,6 +46,8 @@ library.add(faSun, faMoon);
   justify-content: space-between;
   background-color: var(--dark-purple);
   box-shadow: 1rem 0 4rem rgba(255, 255, 255, 0.15);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 
   .logo-icon {
     display: flex;

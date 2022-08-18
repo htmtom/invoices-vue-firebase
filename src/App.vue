@@ -1,9 +1,18 @@
-<script setup></script>
-
 <template>
-  <header></header>
-
-  <main></main>
+  <main>
+    <SideBar />
+    <router-view />
+  </main>
 </template>
 
-<style scoped></style>
+<script setup>
+import SideBar from "./components/SideBar.vue";
+</script>
+
+<style scoped lang="scss">
+main {
+  display: grid;
+  grid-template-columns: var(--aside-width) 1fr;
+  min-height: 100vh;
+}
+</style>

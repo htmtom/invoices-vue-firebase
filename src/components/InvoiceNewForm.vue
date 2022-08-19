@@ -78,12 +78,42 @@
         inputClass="width-30"
       />
     </div>
+
+    <h5 class="title">Invoice info</h5>
+    <div class="inputs-container">
+      <input-base label="Issued date">
+        <date-picker
+          class="extraPadding"
+          v-model="data.date"
+          :format="formatDate"
+          autoApply
+        />
+      </input-base>
+      <input-base
+        v-model="data.allowedPeriod"
+        label="Allowed period in dats"
+        name="allowedPeriod"
+        type="number"
+        inputClass="width-60"
+      />
+      <input-base
+        v-model="dueDate"
+        class="disabled"
+        label="Due date"
+        name="dueDate"
+        type="text"
+        inputClass="width-30"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import InputBase from "./InputBase.vue";
-import { defineProps, ref } from "vue";
+import DatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { computed, defineProps, onUpdated, ref } from "vue";
+
 const props = defineProps(["isOpen"]);
 const data = ref({
   from: {
@@ -100,6 +130,36 @@ const data = ref({
     postcode: "",
     country: "",
   },
+  date: new Date(),
+  allowedPeriod: 1, //In days
+  items: [
+    {
+      name: "",
+      quantity: 1,
+      price: 0,
+    },
+  ],
+});
+
+const dueDate = computed(() =>
+  formatDate(
+    new Date(
+      data.value.date.getTime() +
+        +data.value.allowedPeriod * 24 * 60 * 60 * 1000
+    )
+  )
+);
+
+function formatDate(date) {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
+
+onUpdated(() => {
+  console.log(data.value.date);
 });
 </script>
 

@@ -1,13 +1,15 @@
 <template>
   <div class="input-container" :class="inputClass">
     <label :for="name" class="label">{{ $attrs.label }}</label>
-    <input
-      v-bind="$attrs"
-      :name="name"
-      :placeholder="$attrs.placeholder"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
+    <slot>
+      <input
+        v-bind="$attrs"
+        :name="name"
+        :placeholder="$attrs.placeholder"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
+    </slot>
   </div>
 </template>
 
@@ -15,13 +17,10 @@
 export default {
   emits: ["update:modelValue"],
   props: ["modelValue", "inputClass"],
-  mounted() {
-    console.log(this);
-  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .input-container {
   display: flex;
   flex-direction: column;
@@ -30,6 +29,10 @@ export default {
 
   &.width-30 {
     width: 30%;
+  }
+
+  &.width-60 {
+    width: 60%;
   }
 
   .label {
@@ -46,9 +49,18 @@ export default {
     font-weight: 400;
     outline: none;
     transition: 0.2s border ease-in-out;
+
     &:focus {
       border: 1px solid var(--purple);
     }
+
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+
+  .extraPadding input {
+    padding-left: 3rem;
   }
 }
 </style>

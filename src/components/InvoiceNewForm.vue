@@ -79,7 +79,7 @@
       />
     </div>
 
-    <h5 class="title">Invoice info</h5>
+    <h5 class="title">Invoice Date</h5>
     <div class="inputs-container">
       <input-base label="Issued date">
         <date-picker
@@ -91,7 +91,7 @@
       </input-base>
       <input-base
         v-model="data.allowedPeriod"
-        label="Allowed period in dats"
+        label="Allowed period in days"
         name="allowedPeriod"
         type="number"
         inputClass="width-60"
@@ -105,10 +105,19 @@
         inputClass="width-30"
       />
     </div>
+
+    <h5 class="title">Invoice items</h5>
+    <new-items
+      :items="data.items"
+      :addNewItem="addNewItem"
+      :handleChangeItem="handleChangeItem"
+      :handleDeleteItem="handleDeleteItem"
+    />
   </div>
 </template>
 
 <script setup>
+import NewItems from "./NewItems.vue";
 import InputBase from "./InputBase.vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -137,6 +146,7 @@ const data = ref({
       name: "",
       quantity: 1,
       price: 0,
+      id: Date.now(),
     },
   ],
 });
@@ -155,11 +165,24 @@ function formatDate(date) {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  return `${day}/${month}/${year}`;
+  return `${year}/${month}/${day}`;
+}
+
+function addNewItem() {
+  data.value.items.push({ name: "", quantity: 1, price: 0, id: Date.now() });
+}
+
+function handleChangeItem(index, name, value) {
+  data.value.items[index][name] = value;
+}
+
+function handleDeleteItem(index) {
+  console.log("Clicked");
+  data.value.items.splice(index, 1);
 }
 
 onUpdated(() => {
-  console.log(data.value.date);
+  console.log(data.value);
 });
 </script>
 

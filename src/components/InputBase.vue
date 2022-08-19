@@ -4,6 +4,7 @@
     <slot>
       <input
         v-bind="$attrs"
+        class="input"
         :name="name"
         :placeholder="$attrs.placeholder"
         :value="modelValue"
@@ -33,30 +34,6 @@ export default {
 
   &.width-60 {
     width: 60%;
-  }
-
-  .label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--main-label);
-    margin-bottom: 0.5rem;
-  }
-  input {
-    padding: 1rem 1.5rem;
-    border: 1px solid var(--light-gray);
-    border-radius: 5px;
-    font-size: 1.2rem;
-    font-weight: 400;
-    outline: none;
-    transition: 0.2s border ease-in-out;
-
-    &:focus {
-      border: 1px solid var(--purple);
-    }
-
-    &.disabled {
-      pointer-events: none;
-    }
   }
 
   .extraPadding input {

@@ -4,10 +4,7 @@
     <home-header :toggleForm="toggleForm" />
 
     <div class="skeleton" v-if="invoices.loading">
-      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
-      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
-      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
-      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
+      <Skeletor v-for="count in 4" :key="count" width="100%" height="50" />
     </div>
     <div class="invoices" v-else>
       <home-invoice
@@ -42,7 +39,8 @@ function toggleForm() {
   color: var(--main-text);
 }
 
-.invoices {
+.invoices,
+.skeleton {
   margin-block: 4rem;
   display: flex;
   flex-direction: column;

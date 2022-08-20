@@ -14,11 +14,14 @@
       :handleDeleteItem="handleDeleteItem"
     />
   </div>
+
+  <h5 class="total">Total: {{ total }}</h5>
+
   <button class="add-btn" @click="props.addNewItem">Add item</button>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 import NewItemRow from "./NewItemRow.vue";
 
 const props = defineProps([
@@ -27,6 +30,14 @@ const props = defineProps([
   "handleChangeItem",
   "handleDeleteItem",
 ]);
+
+const total = computed(() => {
+  let total = 0;
+  props.items.forEach((item) => {
+    total += item.quantity * item.price;
+  });
+  return total.toFixed(2) + "$";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -48,5 +59,12 @@ const props = defineProps([
   &:hover {
     background: darken(#7c5dfa, 50%);
   }
+}
+
+.total {
+  margin-block: 2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--main-text);
 }
 </style>

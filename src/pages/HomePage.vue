@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <invoice-new-form :isOpen="isOpen" />
+    <invoice-new-form :isOpen="isOpen" :toggle="toggleForm" />
     <home-header :toggleForm="toggleForm" />
   </div>
 </template>
@@ -14,7 +14,6 @@ const isOpen = ref(false);
 
 function toggleForm() {
   isOpen.value = !isOpen.value;
-  console.log(isOpen.value);
 }
 </script>
 

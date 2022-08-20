@@ -3,9 +3,15 @@
     <invoice-new-form :isOpen="isOpen" :toggle="toggleForm" />
     <home-header :toggleForm="toggleForm" />
 
-    <div class="invoices">
+    <div class="skeleton" v-if="invoices.loading">
+      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
+      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
+      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
+      <Skeletor width="100%" height="50" style="margin-top: 2rem" />
+    </div>
+    <div class="invoices" v-else>
       <home-invoice
-        v-for="invoice in invoices"
+        v-for="invoice in invoices.data"
         :key="invoice.id"
         :invoice="invoice"
       />
@@ -15,30 +21,20 @@
 
 <script setup>
 import HomeHeader from "../components/HomeHeader.vue";
+import { Skeletor } from "vue-skeletor";
 import HomeInvoice from "../components/HomeInvoice.vue";
 import InvoiceNewForm from "../components/InvoiceNewForm.vue";
-import { invCol } from "../firebase/controllers";
-import { formatFirebaseRecord } from "../utils";
-import { ref, onMounted, onUnmounted } from "vue";
-import { onSnapshot } from "firebase/firestore";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
 const isOpen = ref(false);
-const sub = ref("");
-const invoices = ref([]);
+const store = useStore();
+
+const invoices = computed(() => store.state.invoices);
 
 function toggleForm() {
   isOpen.value = !isOpen.value;
 }
-
-onMounted(() => {
-  sub.value = onSnapshot(invCol, (snap) => {
-    invoices.value = snap.docs.map(formatFirebaseRecord);
-  });
-});
-
-onUnmounted(() => {
-  sub.value();
-});
 </script>
 
 <style scoped>

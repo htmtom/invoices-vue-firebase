@@ -16,7 +16,6 @@ export default {
   props: ["invoice"],
   computed: {
     date() {
-      console.log(this.invoice);
       return format(new Date(this.invoice.date.seconds * 1000), "yyyy/MM/dd");
     },
   },

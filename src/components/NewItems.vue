@@ -15,9 +15,13 @@
     />
   </div>
 
-  <h5 class="total">Total: {{ total }}</h5>
+  <h5 class="total">
+    Total: {{ total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+  </h5>
 
-  <button class="add-btn" @click="props.addNewItem">Add item</button>
+  <button type="button" class="add-btn" @click="props.addNewItem">
+    Add item
+  </button>
 </template>
 
 <script setup>

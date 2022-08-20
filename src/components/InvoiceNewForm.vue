@@ -118,7 +118,9 @@
         <button type="button" class="btn-cancel" @click="props.toggle">
           Cancel
         </button>
-        <button class="btn-submit" type="submit">Create invoice</button>
+        <button class="btn-submit" :class="{ disabled: loading }" type="submit">
+          Create invoice
+        </button>
       </div>
     </form>
   </div>
@@ -136,34 +138,39 @@ import { uid } from "uid";
 import { createInvoice } from "../firebase/controllers";
 import { asyncHandler } from "../utils";
 
+function createEmptyInvoice() {
+  return {
+    from: {
+      streetAddress: "",
+      city: "",
+      postcode: "",
+      country: "",
+    },
+    to: {
+      clientName: "",
+      clientEmail: "",
+      streetAddress: "",
+      city: "",
+      postcode: "",
+      country: "",
+    },
+    date: new Date(),
+    allowedPeriod: 1, //In days
+    items: [
+      {
+        name: "",
+        quantity: 1,
+        price: 0,
+        id: Date.now(),
+      },
+    ],
+  };
+}
+
 const props = defineProps(["isOpen", "toggle"]);
 const toast = useToast();
-const data = ref({
-  from: {
-    streetAddress: "",
-    city: "",
-    postcode: "",
-    country: "",
-  },
-  to: {
-    clientName: "",
-    clientEmail: "",
-    streetAddress: "",
-    city: "",
-    postcode: "",
-    country: "",
-  },
-  date: new Date(),
-  allowedPeriod: 1, //In days
-  items: [
-    {
-      name: "",
-      quantity: 1,
-      price: 0,
-      id: Date.now(),
-    },
-  ],
-});
+const loading = ref(false);
+const data = ref(createEmptyInvoice());
 
 const dueDate = computed(() =>
   formatDate(
@@ -201,6 +208,7 @@ function handleDeleteItem(index) {
 }
 
 async function handleSubmit() {
+  loading.value = true;
   const invoice = {
     ...data.value,
     id: uid(7),
@@ -215,7 +223,10 @@ async function handleSubmit() {
     toast.error("Something went wrong");
   } else {
     toast.success("Invoice created successfully");
+    props.toggle();
+    data.value = createEmptyInvoice();
   }
+  loading.value = false;
 }
 </script>
 

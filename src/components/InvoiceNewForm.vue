@@ -252,8 +252,9 @@ async function handleSubmit() {
   overflow-y: scroll;
   scrollbar-width: 0;
   -ms-overflow-style: none;
-  transition: 0.5s transform ease-in-out;
+  transition: 0.5s all ease-in-out;
   transform: translateX(-110%);
+  opacity: 0;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 1.5rem 0 4rem rgba(0, 0, 0, 0.1);
@@ -265,6 +266,7 @@ async function handleSubmit() {
 
   &.open {
     transform: translateX(0);
+    opacity: 1;
   }
 
   .title {

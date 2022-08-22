@@ -164,7 +164,7 @@ function createEmptyInvoice() {
       country: "",
     },
     date: new Date(),
-    isDraft: true,
+    isDraft: false,
     allowedPeriod: 1, //In days
     items: [
       {

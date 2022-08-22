@@ -10,8 +10,11 @@ import "vue-toastification/dist/index.css";
 library.add(faSun, faMoon, faTrash);
 import "vue-skeletor/dist/vue-skeletor.css";
 import "./assets/main.scss";
+import { Skeletor } from "vue-skeletor";
 
 const app = createApp(App);
+app.component(Skeletor.name, Skeletor);
+
 app.use(Toast, {
   position: POSITION.BOTTOM_LEFT,
 });

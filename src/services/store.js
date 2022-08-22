@@ -16,6 +16,15 @@ const store = createStore({
       state.invoices.loading = false;
     },
   },
+
+  getters: {
+    getInvoiceById: (state) => (id) => {
+      return {
+        loading: state.invoices.loading,
+        invoice: state.invoices.data.find((invoice) => invoice.id === id),
+      };
+    },
+  },
 });
 
 export default store;

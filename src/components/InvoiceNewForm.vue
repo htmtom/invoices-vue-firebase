@@ -136,7 +136,7 @@ import { computed, ref, defineProps } from "vue";
 import { uid } from "uid";
 
 import { createInvoice } from "../firebase/controllers";
-import { asyncHandler } from "../utils";
+import { asyncHandler, formatFirebaseError } from "../utils";
 
 function createEmptyInvoice() {
   return {
@@ -220,10 +220,10 @@ async function handleSubmit() {
   };
   const [, err] = await asyncHandler(createInvoice, { invoice });
   if (err) {
-    toast.error("Something went wrong");
+    toast.error(formatFirebaseError(err));
   } else {
     toast.success("Invoice created successfully");
-    props.toggle();
+    props.toggle(false);
     data.value = createEmptyInvoice();
   }
   loading.value = false;

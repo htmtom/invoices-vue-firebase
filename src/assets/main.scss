@@ -9,8 +9,10 @@
     --main-label: white;
     --dark-purple: #252945;
     --light-red: #ec5757;  
+    --dark-red: #a12f2f;  
     --purple: #7c5dfa;
     --light-green: #33d69f;
+    --dark-green: #13986c;
     --orange: #ff8f00;
 
     --aside-width: 8rem;
@@ -58,12 +60,22 @@ button,
     background-color: rgba(0, 0, 0, 0.12);
     pointer-events: none;
   }
+
+  &.small{
+    padding: 8px 16px;
+  }
 }
 
 .dark-purple {background-color: var(--dark-purple);}
-.red {background-color: var(--light-red);}
+.red {
+  background-color: var(--light-red);
+  &:hover { background-color: var(--dark-red);}
+}
 .purple {background-color: var(--purple);}
-.green {background-color: var(--light-green);}
+.green {
+  background-color: var(--light-green);
+  &:hover {background-color: var(--dark-green);}
+}
 .orange {background-color: var(--orange);}
 
 // utility classes
@@ -78,6 +90,14 @@ button,
     padding-top: 72px;
   }
 }
+
+/* Elemtent*/
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+ul{ list-style: none;}
 
 .label {
   font-size: 1.2rem;
@@ -150,4 +170,11 @@ button,
   }
   color: #dfe3fa;
   background-color: rgba(223, 227, 250, 0.1);
+}
+
+.skeleton {
+  margin-block: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

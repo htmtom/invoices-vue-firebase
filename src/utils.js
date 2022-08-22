@@ -13,3 +13,7 @@ export function formatFirebaseRecord(record) {
     ...record.data(),
   };
 }
+
+export function formatFirebaseError(err) {
+  return err.message;
+}

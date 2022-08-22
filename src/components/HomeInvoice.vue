@@ -1,12 +1,14 @@
 <template>
-  <div class="invoice">
-    <p class="id">{{ invoice.id }}</p>
-    <p class="data">{{ date }}</p>
-    <p class="data">{{ invoice.to.clientName }}</p>
-    <p></p>
-    <p class="total">{{ invoice.total }}$</p>
-    <p class="status-button" :class="invoice.status">{{ invoice.status }}</p>
-  </div>
+  <router-link :to="`/invoice/${invoice.id}`">
+    <div class="invoice">
+      <p class="id">{{ invoice.id }}</p>
+      <p class="data">{{ date }}</p>
+      <p class="data">{{ invoice.to.clientName }}</p>
+      <p></p>
+      <p class="total">{{ invoice.total }}$</p>
+      <p class="status-button" :class="invoice.status">{{ invoice.status }}</p>
+    </div>
+  </router-link>
 </template>
 
 <script>

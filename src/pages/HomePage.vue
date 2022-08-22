@@ -18,7 +18,6 @@
 
 <script setup>
 import HomeHeader from "../components/HomeHeader.vue";
-import { Skeletor } from "vue-skeletor";
 import HomeInvoice from "../components/HomeInvoice.vue";
 import InvoiceNewForm from "../components/InvoiceNewForm.vue";
 import { computed, ref } from "vue";
@@ -29,8 +28,8 @@ const store = useStore();
 
 const invoices = computed(() => store.state.invoices);
 
-function toggleForm() {
-  isOpen.value = !isOpen.value;
+function toggleForm(val) {
+  isOpen.value = typeof val == "boolean" ? val : !isOpen.value;
 }
 </script>
 

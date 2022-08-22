@@ -114,6 +114,15 @@
         :handleChangeItem="handleChangeItem"
         :handleDeleteItem="handleDeleteItem"
       />
+      <div class="draft">
+        <input
+          id="isDraft"
+          name="isDraft"
+          type="checkbox"
+          v-model="data.isDraft"
+        />
+        <label for="isDraft"> Mark as draft</label>
+      </div>
       <div class="btns-container">
         <button type="button" class="btn-cancel" @click="props.toggle">
           Cancel
@@ -155,6 +164,7 @@ function createEmptyInvoice() {
       country: "",
     },
     date: new Date(),
+    isDraft: true,
     allowedPeriod: 1, //In days
     items: [
       {
@@ -209,10 +219,11 @@ function handleDeleteItem(index) {
 
 async function handleSubmit() {
   loading.value = true;
+  const { isDraft, ...rest } = data.value;
   const invoice = {
-    ...data.value,
+    ...rest,
     id: uid(7),
-    status: "pending",
+    status: isDraft ? "draft" : "pending",
     total: data.value.items.reduce(
       (acc, item) => acc + item.quantity * item.price,
       0
@@ -289,6 +300,11 @@ async function handleSubmit() {
     .btn-submit {
       flex-grow: 6;
     }
+  }
+
+  .draft {
+    color: var(--main-text);
+    margin-top: 1rem;
   }
 }
 </style>

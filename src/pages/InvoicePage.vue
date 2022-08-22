@@ -96,6 +96,7 @@ export default {
   margin-bottom: 2rem;
   font-weight: 700;
   font-size: 1.5rem;
+  color: var(--main-label);
 }
 
 .invoice-header {

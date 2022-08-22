@@ -31,6 +31,7 @@ html{
 
 body{
     min-height: 100vh;
+    font-size: 1.6rem;
     background-color: var(--main-space);
 }
 
@@ -166,10 +167,10 @@ ul{ list-style: none;}
 
 .draft {
   &::before {
-    background-color: #dfe3fa;
+    background-color: #a5a9bb;
   }
-  color: #dfe3fa;
-  background-color: rgba(223, 227, 250, 0.1);
+  color: #a5a9bb;
+  background-color: rgba(223, 227, 250, 0.4);
 }
 
 .skeleton {

@@ -25,6 +25,7 @@
           </button>
           <button
             class="green"
+            v-show="data.invoice.status !== 'paid'"
             :class="{ disabled: loading }"
             @click="markAsPaid"
           >

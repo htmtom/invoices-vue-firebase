@@ -11,11 +11,13 @@
       <Skeletor v-for="count in 4" :key="count" width="100%" height="50" />
     </div>
     <div class="invoices" v-else>
-      <home-invoice
-        v-for="invoice in invoices.data"
-        :key="invoice.id"
-        :invoice="invoice"
-      />
+      <transition-group name="fade">
+        <home-invoice
+          v-for="invoice in invoices.data"
+          :key="invoice.id"
+          :invoice="invoice"
+        />
+      </transition-group>
     </div>
   </div>
 </template>

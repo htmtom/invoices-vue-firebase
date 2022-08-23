@@ -9,6 +9,8 @@
   />
   <input
     type="number"
+    min="0"
+    step="0.01"
     name="price"
     :value="props.item.price"
     class="input"
@@ -17,6 +19,7 @@
   <input
     type="number"
     name="quantity"
+    min="1"
     :value="props.item.quantity"
     class="input"
     @input="

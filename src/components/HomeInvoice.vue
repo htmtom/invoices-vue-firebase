@@ -6,7 +6,9 @@
       <p class="data">{{ invoice.to.clientName }}</p>
       <p></p>
       <p class="total">{{ invoice.total }}$</p>
-      <p class="status-button" :class="invoice.status">{{ invoice.status }}</p>
+      <p class="status-button" :class="invoice.status">
+        {{ invoice.status }}
+      </p>
     </div>
   </router-link>
 </template>

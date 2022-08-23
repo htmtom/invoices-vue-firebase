@@ -25,7 +25,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { ref } from "vue";
 
-const isDark = ref(true);
+const isDark = ref(false);
 
 function toggleDarkMode() {
   isDark.value = !isDark.value;

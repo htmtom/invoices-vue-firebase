@@ -4,11 +4,7 @@
   </div>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .message {
   padding: 1.2rem;
   margin-bottom: 1.6rem;

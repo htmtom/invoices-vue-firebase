@@ -4,6 +4,7 @@
     --main-space: #252945;
     --invoice-bg: #070e3c;
     --main-form : #414776;
+    --table-bg: #161b2b;
     --main-text: white;
     --secondary-text: #b2b3b8;
     --main-label: white;
@@ -37,6 +38,7 @@ body{
 }
 
 body.light{
+  --table-bg: #f9fafe;
   --main-space: #f3f8f8;
   --main-form : #e8e7e7;
   --main-text: #252945;
@@ -100,6 +102,7 @@ button,
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
 }
 
+.id{text-transform: uppercase; color: var(--main-text)}
 /* Elements*/
 a{
   color: inherit;

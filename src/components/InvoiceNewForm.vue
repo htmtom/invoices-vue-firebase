@@ -1,4 +1,9 @@
 <template>
+  <div
+    class="overlay"
+    :class="{ open: props.isOpen }"
+    @click="props.toggle"
+  ></div>
   <div class="new-invoice" :class="{ open: props.isOpen }">
     <form @submit.prevent="handleSubmit">
       <h5 class="title">Bill from</h5>
@@ -213,7 +218,10 @@ function handleChangeItem(index, name, value) {
 }
 
 function handleDeleteItem(index) {
-  console.log("Clicked");
+  if (data.value.items.length === 1) {
+    toast.error("You must have at least one item");
+    return;
+  }
   data.value.items.splice(index, 1);
 }
 
@@ -242,10 +250,27 @@ async function handleSubmit() {
 </script>
 
 <style lang="scss" scoped>
+.overlay {
+  position: fixed;
+  left: calc(var(--aside-width) + var(--form-width));
+  top: 0;
+  bottom: 0;
+  right: 0;
+  backdrop-filter: blur(0px);
+  visibility: hidden;
+  transition: backdrop-filter 0.3s;
+
+  &.open {
+    visibility: visible;
+    backdrop-filter: blur(2px);
+  }
+}
+
 .new-invoice {
   position: absolute;
+  z-index: 10;
   height: 100vh;
-  width: 50rem;
+  width: var(--form-width);
   background: var(--main-form);
   top: 0;
   left: var(--aside-width);

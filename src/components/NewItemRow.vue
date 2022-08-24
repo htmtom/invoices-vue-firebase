@@ -28,7 +28,11 @@
   />
 
   <p class="input">{{ total }}</p>
-  <button class="delete-btn" @click="props.handleDeleteItem(props.index)">
+  <button
+    type="button"
+    class="delete-btn"
+    @click="props.handleDeleteItem(props.index)"
+  >
     <font-awesome-icon class="icon" icon="fa-solid fa-trash" />
   </button>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/invoice/${invoice.id}`">
-    <div class="invoice">
+    <div class="invoice box">
       <p class="id">{{ invoice.id }}</p>
       <p class="data">{{ date }}</p>
       <p class="data">{{ invoice.to.clientName }}</p>
@@ -28,10 +28,6 @@ export default {
 
 <style lang="scss" scoped>
 .invoice {
-  background-color: var(--invoice-bg);
-  padding: 2rem 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 1rem;

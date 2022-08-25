@@ -26,17 +26,21 @@
 
         <div class="btns">
           <button
-            class="orange"
+            class="orange small"
             :class="{ disabled: loading }"
             @click="toggleForm"
           >
             Edit invoice
           </button>
-          <button class="red" :class="{ disabled: loading }" @click="remove">
+          <button
+            class="red small"
+            :class="{ disabled: loading }"
+            @click="remove"
+          >
             Delete invoice
           </button>
           <button
-            class="green"
+            class="green small"
             v-show="data.invoice.status !== 'paid'"
             :class="{ disabled: loading }"
             @click="markAsPaid"

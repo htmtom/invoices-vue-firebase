@@ -119,21 +119,13 @@
         :handleChangeItem="handleChangeItem"
         :handleDeleteItem="handleDeleteItem"
       />
-      <div class="draft">
-        <input
-          id="isDraft"
-          name="isDraft"
-          type="checkbox"
-          v-model="data.isDraft"
-        />
-        <label for="isDraft"> Mark as draft</label>
-      </div>
+
       <div class="btns-container">
         <button type="button" class="btn-cancel" @click="props.toggle">
           Cancel
         </button>
         <button class="btn-submit" :class="{ disabled: loading }" type="submit">
-          Create invoice
+          Update invoice
         </button>
       </div>
     </form>
@@ -147,45 +139,25 @@ import { useToast } from "vue-toastification";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { computed, ref, defineProps } from "vue";
-import { uid } from "uid";
 
-import { createInvoice } from "../firebase/controllers";
+import { updateInvoice } from "../firebase/controllers";
 import { asyncHandler, formatFirebaseError } from "../utils";
 
-function createEmptyInvoice() {
+function updateFormWithInvoice(invoice) {
+  /* eslint-disable no-unused-vars */
+  const { id, status, total, date, from, to, ...rest } = invoice;
   return {
-    from: {
-      streetAddress: "",
-      city: "",
-      postcode: "",
-      country: "",
-    },
-    to: {
-      clientName: "",
-      clientEmail: "",
-      streetAddress: "",
-      city: "",
-      postcode: "",
-      country: "",
-    },
-    date: new Date(),
-    isDraft: false,
-    allowedPeriod: 1, //In days
-    items: [
-      {
-        name: "",
-        quantity: 1,
-        price: 0,
-        id: Date.now(),
-      },
-    ],
+    ...rest,
+    to: { ...to },
+    from: { ...from },
+    date: new Date(date.seconds * 1000),
   };
 }
 
-const props = defineProps(["isOpen", "toggle"]);
+const props = defineProps(["isOpen", "toggle", "invoice"]);
 const toast = useToast();
 const loading = ref(false);
-const data = ref(createEmptyInvoice());
+const data = ref(updateFormWithInvoice(props.invoice));
 
 const dueDate = computed(() =>
   formatDate(
@@ -227,23 +199,23 @@ function handleDeleteItem(index) {
 
 async function handleSubmit() {
   loading.value = true;
-  const { isDraft, ...rest } = data.value;
   const invoice = {
-    ...rest,
-    id: uid(7),
-    status: isDraft ? "draft" : "pending",
+    ...data.value,
     total: data.value.items.reduce(
       (acc, item) => acc + item.quantity * item.price,
       0
     ),
   };
-  const [, err] = await asyncHandler(createInvoice, { invoice });
+
+  const [, err] = await asyncHandler(updateInvoice, {
+    invoice,
+    id: props.invoice.id,
+  });
   if (err) {
     toast.error(formatFirebaseError(err));
   } else {
-    toast.success("Invoice created successfully");
+    toast.success("Invoice updated successfully");
     props.toggle(false);
-    data.value = createEmptyInvoice();
   }
   loading.value = false;
 }

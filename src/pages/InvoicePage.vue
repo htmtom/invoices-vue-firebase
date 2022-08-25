@@ -11,6 +11,11 @@
     >
 
     <div class="invoice-data" v-else>
+      <invoice-edit-form
+        :invoice="data.invoice"
+        :isOpen="isOpen"
+        :toggle="toggleForm"
+      />
       <div class="invoice-header box">
         <div class="status">
           Status: &nbsp;
@@ -20,6 +25,13 @@
         </div>
 
         <div class="btns">
+          <button
+            class="orange"
+            :class="{ disabled: loading }"
+            @click="toggleForm"
+          >
+            Edit invoice
+          </button>
           <button class="red" :class="{ disabled: loading }" @click="remove">
             Delete invoice
           </button>
@@ -100,18 +112,21 @@
 
 <script>
 import BriefMessage from "../components/BriefMessage.vue";
+import InvoiceEditForm from "../components/InvoiceEditForm.vue";
 import { deleteInvoice, markInvoiceAsPaid } from "../firebase/controllers";
 import { useToast } from "vue-toastification";
+import useToggle from "../composables/useToggle";
 import { asyncHandler, formatDate, formatFirebaseError } from "../utils";
 
 export default {
-  components: { BriefMessage },
-  data() {
-    return { loading: false };
-  },
+  components: { BriefMessage, InvoiceEditForm },
   setup() {
     const toast = useToast();
-    return { toast };
+    const { isTrue: isOpen, toggle: toggleForm } = useToggle();
+    return { toast, isOpen, toggleForm };
+  },
+  data() {
+    return { loading: false };
   },
   computed: {
     data() {

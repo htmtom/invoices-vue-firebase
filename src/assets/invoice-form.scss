@@ -1,0 +1,84 @@
+.overlay {
+    position: fixed;
+    left: calc(var(--aside-width) + var(--form-width));
+    top: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(0px);
+    visibility: hidden;
+    transition: backdrop-filter 0.3s;
+  
+    &.open {
+      visibility: visible;
+      backdrop-filter: blur(2px);
+    }
+  }
+  
+  .new-invoice {
+    position: absolute;
+    z-index: 10;
+    height: 100vh;
+    width: var(--form-width);
+    background: var(--main-form);
+    top: 0;
+    left: var(--aside-width);
+    overflow-y: scroll;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;
+    transition: 0.5s all ease-in-out;
+    transform: translateX(-110%);
+    opacity: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 1.5rem 0 4rem rgba(0, 0, 0, 0.1);
+    padding: 5rem;
+  
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    &.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
+    .title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 1.4rem;
+  
+      &:not(:first-child) {
+        margin-top: 6rem;
+      }
+    }
+  
+    .inputs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+  
+      > * {
+        flex-grow: 1;
+      }
+    }
+  
+    .btns-container {
+      margin-block: 2rem;
+      display: flex;
+  
+      .btn-cancel {
+        flex-grow: 1;
+        background-color: var(--main-text);
+        color: var(--main-space);
+      }
+      .btn-submit {
+        flex-grow: 6;
+      }
+    }
+  
+    .draft {
+      color: var(--main-text);
+      margin-top: 1rem;
+    }
+  }

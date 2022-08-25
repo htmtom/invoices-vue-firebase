@@ -15,6 +15,7 @@
     --light-green: #33d69f;
     --dark-green: #13986c;
     --orange: #ff8f00;
+    --dark-orange: #c36e00;
 
     --aside-width: 8rem;
     --form-width: 50rem;
@@ -80,7 +81,10 @@ button,
   background-color: var(--light-green);
   &:hover {background-color: var(--dark-green);}
 }
-.orange {background-color: var(--orange);}
+.orange {
+  background-color: var(--orange);
+  &:hover {background-color: var(--dark-orange);}
+}
 
 // utility classes
 .flex { display: flex; }

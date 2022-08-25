@@ -23,16 +23,18 @@
 </template>
 
 <script setup>
-import HomeHeader from "../components/HomeHeader.vue";
-import HomeInvoice from "../components/HomeInvoice.vue";
-import InvoiceNewForm from "../components/InvoiceNewForm.vue";
-import { EqualityFilter } from "../services/filters";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
-const isOpen = ref(false);
+import HomeHeader from "../components/HomeHeader.vue";
+import HomeInvoice from "../components/HomeInvoice.vue";
+import InvoiceNewForm from "../components/InvoiceNewForm.vue";
+import useToggle from "../composables/useToggle";
+import { EqualityFilter } from "../services/filters";
+
 const selectedStatus = ref("all");
 const store = useStore();
+const { isTrue: isOpen, toggle: toggleForm } = useToggle();
 
 const filters = computed(() => {
   return [new EqualityFilter({ field: "status", value: selectedStatus.value })];
@@ -45,10 +47,6 @@ const invoices = computed(() => ({
     store.state.invoices.data
   ),
 }));
-
-function toggleForm(val) {
-  isOpen.value = typeof val == "boolean" ? val : !isOpen.value;
-}
 
 function handleChange(event) {
   console.log(event);

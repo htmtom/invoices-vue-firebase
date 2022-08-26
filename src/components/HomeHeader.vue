@@ -4,12 +4,13 @@
       <h3>Invoice</h3>
       <h4>Here you can create your invoices</h4>
     </div>
-    <div class="right">
+    <div class="right" v-if="isAuthenticated">
       <select
         :value="props.selectedStatus"
         @change="props.handleChange($event)"
       >
         <option value="all" disabled>Filter by status</option>
+        <option value="all">All invoices</option>
         <option value="paid">Paid</option>
         <option value="pending">Pending</option>
         <option value="draft">Draft</option>
@@ -20,9 +21,12 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
 const props = defineProps(["toggleForm", "handleChange", "selectedStatus"]);
-console.log(props);
+
+const isAuthenticated = computed(() => !!store.state.user);
 </script>
 
 <style lang="scss" scoped>

@@ -17,19 +17,60 @@
         class="icon"
         @click="toggleDarkMode"
       />
+
+      <font-awesome-icon
+        v-if="isAuthenticated"
+        icon="fa-solid fa-arrow-right-from-bracket"
+        class="icon"
+        @click="signOut"
+      />
+
+      <font-awesome-icon
+        v-else
+        icon="fa-brands fa-google"
+        class="icon google"
+        @click="signIn"
+      />
     </div>
   </aside>
 </template>
 
 <script setup>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useToast } from "vue-toastification";
+import { useStore } from "vuex";
+import { logoutRequest, signInRequest } from "../firebase/controllers";
+import { asyncHandler, formatFirebaseError } from "../utils";
 
 const isDark = ref(false);
+const toast = useToast();
+const store = useStore();
+
+const isAuthenticated = computed(() => {
+  return !!store.state.user;
+});
 
 function toggleDarkMode() {
   isDark.value = !isDark.value;
   document.body.classList.toggle("light");
+}
+
+async function signIn() {
+  const [res, err] = await asyncHandler(signInRequest);
+  if (res) {
+    toast.success("Signed in Successfully");
+  } else {
+    toast.error(formatFirebaseError(err));
+  }
+}
+
+async function signOut() {
+  const [, err] = await asyncHandler(logoutRequest);
+  if (!err) {
+    store.commit("logout");
+  } else {
+    toast.error(formatFirebaseError(err));
+  }
 }
 </script>
 
@@ -72,12 +113,20 @@ function toggleDarkMode() {
   .icon-container {
     display: grid;
     place-items: center;
+    gap: 5rem;
+    margin-bottom: 2rem;
 
     .icon {
-      padding-bottom: 3rem;
       font-size: 3rem;
       color: #ccc;
       cursor: pointer;
+
+      &.google {
+        color: white;
+        background: #dd4b39;
+        padding: 1rem;
+        border-radius: 50%;
+      }
     }
   }
 }

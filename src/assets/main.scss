@@ -90,9 +90,9 @@ button,
 .flex { display: flex; }
 .flex-column { flex-direction: column; }
 .container {
-  width: 95%;
+  width: 700px;
   padding: 40px 10px;
-  max-width: 700px;
+  max-width: 98%;
   margin: 0 auto;
   @media (min-width: 900px) {
     padding-top: 72px;

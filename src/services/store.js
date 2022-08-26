@@ -6,14 +6,27 @@ const store = createStore({
     return {
       invoices: {
         data: [],
-        loading: true,
+        loading: false,
       },
+      isAuthenticated: false,
     };
   },
   mutations: {
+    loadingInvoices(state) {
+      state.invoices.loading = true;
+    },
     setInvoices(state, invoices) {
       state.invoices.data = invoices;
       state.invoices.loading = false;
+    },
+
+    login(state, user) {
+      state.user = user;
+    },
+
+    logout(state) {
+      state.user = null;
+      state.invoices.data = [];
     },
   },
 

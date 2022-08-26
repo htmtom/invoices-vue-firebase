@@ -151,6 +151,9 @@ import { uid } from "uid";
 
 import { createInvoice } from "../firebase/controllers";
 import { asyncHandler, formatFirebaseError } from "../utils";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 function createEmptyInvoice() {
   return {
@@ -231,6 +234,7 @@ async function handleSubmit() {
   const invoice = {
     ...rest,
     id: uid(7),
+    user: store.state.user?.uid || "",
     status: isDraft ? "draft" : "pending",
     total: data.value.items.reduce(
       (acc, item) => acc + item.quantity * item.price,

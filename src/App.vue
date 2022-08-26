@@ -12,17 +12,30 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { invCol } from "./firebase/controllers";
-import { onSnapshot } from "firebase/firestore";
+import { onSnapshot, query, where } from "firebase/firestore";
 import { formatFirebaseRecord } from "./utils";
 import SideBar from "./components/SideBar.vue";
 import { useStore } from "vuex";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "./firebase";
 
 const store = useStore();
 const unsubscripe = ref("");
 
 onMounted(() => {
-  unsubscripe.value = onSnapshot(invCol, (snap) => {
-    store.commit("setInvoices", snap.docs.map(formatFirebaseRecord));
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      store.commit("login", user);
+      store.commit("loadingInvoices");
+      unsubscripe.value = onSnapshot(
+        query(invCol, where("user", "==", user.uid)),
+        (snap) => {
+          store.commit("setInvoices", snap.docs.map(formatFirebaseRecord));
+        }
+      );
+    } else {
+      if (unsubscripe.value) unsubscripe.value();
+    }
   });
 });
 

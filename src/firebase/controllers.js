@@ -1,4 +1,4 @@
-import { db } from "./index.js";
+import { db, auth } from "./index.js";
 import {
   doc,
   setDoc,
@@ -6,6 +6,17 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
+
+export async function signInRequest() {
+  return await signInWithPopup(auth, provider);
+}
+
+export async function logoutRequest() {
+  return await signOut(auth);
+}
 
 export async function createInvoice({ invoice }) {
   const invoiceRef = doc(db, "invoices", invoice.id);

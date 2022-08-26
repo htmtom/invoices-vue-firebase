@@ -6,10 +6,22 @@
       :selectedStatus="selectedStatus"
       :handleChange="handleChange"
     />
+    <brief-message variant="info" v-if="!isAuthenticated">
+      Sign in to start creating your invoices.
+    </brief-message>
 
     <div class="skeleton" v-if="invoices.loading">
       <Skeletor v-for="count in 4" :key="count" width="100%" height="50" />
     </div>
+
+    <brief-message
+      variant="info"
+      v-else-if="
+        invoices.data.length == 0 && isAuthenticated && selectedStatus == 'all'
+      "
+    >
+      Start creating your invoices from new invoice button.
+    </brief-message>
     <div class="invoices" v-else>
       <transition-group name="fade">
         <home-invoice
@@ -29,6 +41,7 @@ import { useStore } from "vuex";
 import HomeHeader from "../components/HomeHeader.vue";
 import HomeInvoice from "../components/HomeInvoice.vue";
 import InvoiceNewForm from "../components/InvoiceNewForm.vue";
+import BriefMessage from "../components/BriefMessage.vue";
 import useToggle from "../composables/useToggle";
 import { EqualityFilter } from "../services/filters";
 
@@ -47,6 +60,8 @@ const invoices = computed(() => ({
     store.state.invoices.data
   ),
 }));
+
+const isAuthenticated = computed(() => !!store.state.user);
 
 function handleChange(event) {
   console.log(event);

@@ -7,6 +7,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { uid } from "uid";
+import { getDemoInvoice } from "../utils.js";
 
 const provider = new GoogleAuthProvider();
 
@@ -21,6 +23,11 @@ export async function logoutRequest() {
 export async function createInvoice({ invoice }) {
   const invoiceRef = doc(db, "invoices", invoice.id);
   return await setDoc(invoiceRef, invoice);
+}
+
+export async function createDemoInvoice({ userId }) {
+  const invoiceRef = doc(db, "invoices", uid(6));
+  return await setDoc(invoiceRef, getDemoInvoice(userId));
 }
 
 export async function updateInvoice({ invoice, id }) {

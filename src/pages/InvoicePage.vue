@@ -178,6 +178,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/mixins";
+
 .go-back {
   display: block;
   margin-bottom: 2rem;
@@ -193,10 +195,24 @@ export default {
   color: var(--main-label);
   margin-bottom: 5rem;
 
+  @include mixins.respond(mobile) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+
   .status {
     display: flex;
     align-items: center;
     font-size: 1.4rem;
+  }
+
+  .btns {
+    @include mixins.respond(mini) {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
   }
 }
 
@@ -213,8 +229,19 @@ export default {
     gap: 1rem;
     margin-bottom: 5rem;
 
+    @include mixins.respond(mini) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .date {
       margin-bottom: 2rem;
+    }
+
+    .email {
+      @include mixins.respond(mini) {
+        order: -1;
+        grid-column: span 2;
+      }
     }
   }
 

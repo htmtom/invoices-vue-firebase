@@ -32,10 +32,18 @@ const isAuthenticated = computed(() => !!store.state.user);
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/mixins";
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include mixins.respond(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
 
   .left {
     h3 {

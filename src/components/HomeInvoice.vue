@@ -4,7 +4,6 @@
       <p class="id">{{ invoice.id }}</p>
       <p class="data">{{ date }}</p>
       <p class="data">{{ invoice.to.clientName }}</p>
-      <p></p>
       <p class="total">{{ invoice.total }}$</p>
       <p class="status-button" :class="invoice.status">
         {{ invoice.status }}
@@ -27,16 +26,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/mixins";
+
 .invoice {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
   align-items: center;
   gap: 3rem;
+
+  @include mixins.respond(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-flow: column;
+    gap: 0;
+  }
 
   &:hover {
     border: 1px solid var(--main-text);
@@ -54,6 +59,10 @@ export default {
   .total {
     font-size: 1.7rem;
     font-weight: 800;
+  }
+
+  .status-button {
+    justify-self: flex-start;
   }
 }
 </style>

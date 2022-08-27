@@ -1,6 +1,7 @@
 $sizes : (
     "tab": 900px,
-    "mobile": 600px
+    "mobile": 620px,
+    "mini": 480px
 );
 
 @mixin respond($size){

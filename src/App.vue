@@ -45,9 +45,16 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use "./assets/mixins";
+
 main {
   display: grid;
   grid-template-columns: var(--aside-width) 1fr;
   min-height: 100vh;
+
+  @include mixins.respond(tab) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

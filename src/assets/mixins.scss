@@ -1,0 +1,8 @@
+$sizes : (
+    "tab": 900px,
+    "mobile": 600px
+);
+
+@mixin respond($size){
+    @media (max-width : map-get($sizes, $size)){@content}
+}

@@ -75,6 +75,8 @@ async function signOut() {
 </script>
 
 <style scoped lang="scss">
+@use "../assets/mixins";
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -88,6 +90,14 @@ async function signOut() {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 
+  @include mixins.respond(tab) {
+    height: var(--aside-width);
+    flex-direction: row;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
   .logo-icon {
     display: flex;
     align-items: center;
@@ -97,6 +107,13 @@ async function signOut() {
     background: var(--purple);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+
+    @include mixins.respond(tab) {
+      width: 8rem;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
 
     .icon {
       width: 3rem;
@@ -115,6 +132,12 @@ async function signOut() {
     place-items: center;
     gap: 5rem;
     margin-bottom: 2rem;
+
+    @include mixins.respond(tab) {
+      display: flex;
+      margin-bottom: 0;
+      margin-right: 2rem;
+    }
 
     .icon {
       font-size: 3rem;

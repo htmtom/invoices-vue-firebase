@@ -1,7 +1,10 @@
 # invoice app
 
-This app helps you creating your invoices once you are logged in using google
+This app helps you creating your invoices once you are logged in using google.
 It is built with Vue and Firebase.
+
+## View live
+[Project link](https://invoices-fawn.vercel.app/)
 
 ## Recommended IDE Setup
 

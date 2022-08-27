@@ -1,6 +1,7 @@
-# invoice
+# invoice app
 
-This template should help get you started developing with Vue 3 in Vite.
+This app helps you creating your invoices once you are logged in using google
+It is built with Vue and Firebase.
 
 ## Recommended IDE Setup
 

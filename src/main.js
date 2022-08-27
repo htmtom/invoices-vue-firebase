@@ -9,6 +9,7 @@ import {
   faTrash,
   faPlus,
   faEdit,
+  faCheck,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -31,6 +32,7 @@ library.add(
   faEdit,
   faGoogle,
   faTrash,
+  faCheck,
   faArrowRightFromBracket
 );
 

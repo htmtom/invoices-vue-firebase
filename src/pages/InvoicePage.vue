@@ -30,14 +30,14 @@
             :class="{ disabled: loading }"
             @click="toggleForm"
           >
-            Edit invoice
+            <font-awesome-icon icon="fa-solid fa-edit" />&nbsp; Edit invoice
           </button>
           <button
             class="red small"
             :class="{ disabled: loading }"
             @click="remove"
           >
-            Delete invoice
+            <font-awesome-icon icon="fa-solid fa-trash" />&nbsp; Delete invoice
           </button>
           <button
             class="green small"
@@ -45,7 +45,7 @@
             :class="{ disabled: loading }"
             @click="markAsPaid"
           >
-            Mark as Paid
+            <font-awesome-icon icon="fa-solid fa-check" />&nbsp;Mark as Paid
           </button>
         </div>
       </div>

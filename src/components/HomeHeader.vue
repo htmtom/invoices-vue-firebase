@@ -15,7 +15,9 @@
         <option value="pending">Pending</option>
         <option value="draft">Draft</option>
       </select>
-      <button class="button" @click="props.toggleForm">New Invoice</button>
+      <button class="button" @click="props.toggleForm">
+        <font-awesome-icon icon="fa-solid fa-plus" />&nbsp; New Invoice
+      </button>
     </div>
   </div>
 </template>

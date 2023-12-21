@@ -20,7 +20,7 @@
         invoices.data.length == 0 && isAuthenticated && selectedStatus == 'all'
       "
     >
-      Start creating your invoices from new invoice button.
+      Start creating your invoices from new invoice button!
     </brief-message>
     <div class="invoices" v-else>
       <transition-group name="fade">

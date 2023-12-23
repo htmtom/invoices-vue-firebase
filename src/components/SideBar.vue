@@ -85,17 +85,18 @@ async function signOut() {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--dark-purple);
-  box-shadow: 1rem 0 4rem rgba(255, 255, 255, 0.15);
+  background-color: var(--dark-blue);
+  box-shadow: 0rem 0 0rem rgba(255, 255, 255, 0.15);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-
+  max-width: 300px;
   @include mixins.respond(tab) {
     height: var(--aside-width);
     flex-direction: row;
     border-top-right-radius: 0;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    max-width: 100%;
   }
 
   .logo-icon {
@@ -104,7 +105,7 @@ async function signOut() {
     justify-content: center;
     align-items: center;
     height: 8rem;
-    background: var(--purple);
+    background: var(--dark-blue);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 

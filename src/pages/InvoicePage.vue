@@ -39,36 +39,60 @@
           >
             <font-awesome-icon icon="fa-solid fa-trash" />&nbsp; Delete invoice
           </button>
-          <button
+<!--           <button
             class="green small"
             v-show="data.invoice.status !== 'paid'"
             :class="{ disabled: loading }"
             @click="markAsPaid"
           >
             <font-awesome-icon icon="fa-solid fa-check" />&nbsp;Mark as Paid
+          </button> -->
+          <button
+            class="green small"
+            v-show="data.invoice.status !== 'QQQY'"
+            :class="{ disabled: loading }"
+            @click="markAsQQQY"
+          >
+            <font-awesome-icon icon="fa-solid fa-check" />&nbsp;Mark as QQQY
+          </button>
+          <button
+            class="green small"
+            v-show="data.invoice.status !== 'IWMY'"
+            :class="{ disabled: loading }"
+            @click="markAsIWMY"
+          >
+            <font-awesome-icon icon="fa-solid fa-check" />&nbsp;Mark as IWMY
+          </button>
+          <button
+            class="green small"
+            v-show="data.invoice.status !== 'JEPY'"
+            :class="{ disabled: loading }"
+            @click="markAsJEPY"
+          >
+            <font-awesome-icon icon="fa-solid fa-check" />&nbsp;Mark as JEPY
           </button>
         </div>
       </div>
 
       <div class="invoice-details box">
         <div class="header">
-          <p class="id">{{ data.invoice.id }}</p>
-          <ul class="secondary">
+          <!-- <p class="id">{{ data.invoice.id }}</p> -->
+<!--           <ul class="secondary">
             <li>{{ data.invoice.from.streetAddress }}</li>
             <li>{{ data.invoice.from.city }}</li>
             <li>{{ data.invoice.from.postcode }}</li>
             <li>{{ data.invoice.from.country }}</li>
-          </ul>
+          </ul> -->
         </div>
         <div class="details">
           <div class="dates">
             <div class="date">
-              <p class="secondary">Invoice date</p>
-              <p class="primary">{{ dates?.currentDate }}</p>
+              <p class="secondary">TICKER:</p>
+              <p class="primary">{{ data.invoice.status }}</p>
             </div>
             <div class="date">
-              <p class="secondary">Payment due</p>
-              <p class="primary">{{ dates?.dueDate }}</p>
+              <p class="secondary">Holding date</p>
+              <p class="primary">{{ dates?.currentDate }}</p>
             </div>
           </div>
 
@@ -78,6 +102,7 @@
             <ul class="secondary">
               <li>{{ data.invoice.to.streetAddress }}</li>
               <li>{{ data.invoice.to.city }}</li>
+              <li>{{ data.invoice.to.state }}</li>
               <li>{{ data.invoice.to.postcode }}</li>
               <li>{{ data.invoice.to.country }}</li>
             </ul>
@@ -99,15 +124,15 @@
           <tbody class="primary">
             <tr v-for="item in data.invoice.items" :key="item.id">
               <td>{{ item.name }}</td>
-              <td>{{ item.price }}</td>
+              <td>${{ formatPrice(item.price) }}</td>
               <td>{{ item.quantity }}</td>
-              <td>{{ (item.quantity * item.price).toFixed(2) }}$</td>
+              <td>${{ formatPrice(item.quantity * item.price) }}</td>
             </tr>
           </tbody>
         </table>
         <div class="total">
           <p>Total</p>
-          <p class="total-text">{{ data.invoice.total }}$</p>
+          <p class="total-text">${{ formatPrice(data.invoice.total) }}</p>
         </div>
       </div>
     </div>
@@ -117,7 +142,7 @@
 <script>
 import BriefMessage from "../components/BriefMessage.vue";
 import InvoiceEditForm from "../components/InvoiceEditForm.vue";
-import { deleteInvoice, markInvoiceAsPaid } from "../firebase/controllers";
+import { deleteInvoice, markInvoiceAsPaid, markInvoiceAsQQQY,  markInvoiceAsIWMY,  markInvoiceAsJEPY } from "../firebase/controllers";
 import { useToast } from "vue-toastification";
 import useToggle from "../composables/useToggle";
 import { asyncHandler, formatDate, formatFirebaseError } from "../utils";
@@ -156,6 +181,40 @@ export default {
       if (err) {
         this.toast.error(formatFirebaseError(err));
       }
+    },
+    async markAsQQQY() {
+      this.loading = true;
+      const [, err] = await asyncHandler(markInvoiceAsQQQY, {
+        id: this.$route.params.id,
+      });
+      this.loading = false;
+      if (err) {
+        this.toast.error(formatFirebaseError(err));
+      }
+    },
+    async markAsIWMY() {
+      this.loading = true;
+      const [, err] = await asyncHandler(markInvoiceAsIWMY, {
+        id: this.$route.params.id,
+      });
+      this.loading = false;
+      if (err) {
+        this.toast.error(formatFirebaseError(err));
+      }
+    },
+    async markAsJEPY() {
+      this.loading = true;
+      const [, err] = await asyncHandler(markInvoiceAsJEPY, {
+        id: this.$route.params.id,
+      });
+      this.loading = false;
+      if (err) {
+        this.toast.error(formatFirebaseError(err));
+      }
+    },
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace(',', '.')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
 
     async remove() {

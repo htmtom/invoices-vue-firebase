@@ -4,7 +4,7 @@
       <p class="id">{{ invoice.id }}</p>
       <p class="data">{{ date }}</p>
       <p class="data">{{ invoice.to.clientName }}</p>
-      <p class="total">{{ invoice.total }}$</p>
+      <p class="total">${{ formatPrice(invoice.total) }}</p>
       <p class="status-button" :class="invoice.status">
         {{ invoice.status }}
       </p>
@@ -22,7 +22,14 @@ export default {
       return format(new Date(this.invoice.date.seconds * 1000), "yyyy/MM/dd");
     },
   },
-};
+
+  methods: {    
+    formatPrice(value) {
+          let val = (value/1).toFixed(2).replace(',', '.')
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+  }
+};  
 </script>
 
 <style lang="scss" scoped>

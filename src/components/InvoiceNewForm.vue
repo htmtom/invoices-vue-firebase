@@ -8,7 +8,7 @@
     <form @submit.prevent="handleSubmit">
       <h5 class="title">Bill from</h5>
       <div class="inputs-container">
-        <input-base
+        <!-- <input-base
           v-model="data.from.streetAddress"
           label="Street Address"
           name="streetAddress"
@@ -35,7 +35,7 @@
           name="country"
           type="text"
           inputClass="width-30"
-        />
+        /> -->
       </div>
 
       <h5 class="title">Bill to</h5>
@@ -47,6 +47,7 @@
           type="text"
           inputClass="width-100"
         />
+<!--         
         <input-base
           v-model="data.to.clientEmail"
           label="Client email"
@@ -70,6 +71,13 @@
           inputClass="width-30"
         />
         <input-base
+          v-model="data.to.state"
+          label="State"
+          name="state"
+          type="text"
+          inputClass="width-30"
+        />
+        <input-base
           v-model="data.to.postcode"
           label="Postal code"
           name="postcode"
@@ -82,7 +90,8 @@
           name="country"
           type="text"
           inputClass="width-30"
-        />
+        /> 
+      -->
       </div>
 
       <h5 class="title">Invoice Date</h5>
@@ -233,7 +242,7 @@ async function handleSubmit() {
   const { isDraft, ...rest } = data.value;
   const invoice = {
     ...rest,
-    id: uid(7),
+    id: Date.now() + uid(7), // append unfromatted date-time to id
     user: store.state.user?.uid || "",
     status: isDraft ? "draft" : "pending",
     total: data.value.items.reduce(

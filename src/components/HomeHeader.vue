@@ -2,18 +2,21 @@
   <div class="header">
     <div class="left">
       <h3>Invoice</h3>
-      <h4>Here you can create your invoicesaaa</h4>
+      <h4></h4>
     </div>
     <div class="right" v-if="isAuthenticated">
       <select
         :value="props.selectedStatus"
         @change="props.handleChange($event)"
       >
-        <option value="all" disabled>Filter by status</option>
-        <option value="all">All invoices</option>
-        <option value="paid">Paid</option>
-        <option value="pending">Pending</option>
+        <option value="all" disabled>Filter by ticker</option>
+        <option value="all">All</option>
+       <!--  <option value="paid">Paid</option> -->
+       <!-- <option value="pending">Pending</option> -->
         <option value="draft">Draft</option>
+        <option value="QQQY">QQQY</option>
+        <option value="IWMY">IWMY</option>
+        <option value="JEPY">JEPY</option>
       </select>
       <button class="button" @click="props.toggleForm">
         <font-awesome-icon icon="fa-solid fa-plus" />&nbsp; New Invoice

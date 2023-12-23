@@ -46,3 +46,10 @@ app.use(Toast, {
 app.use(router);
 app.use(store);
 app.mount("#app");
+
+// global filter
+app.config.globalProperties.$filters = {
+  valueFilter(value) {
+    return '$' + value
+  }
+}

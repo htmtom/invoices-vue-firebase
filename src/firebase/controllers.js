@@ -22,7 +22,7 @@ export async function logoutRequest() {
 
 export async function createInvoice({ invoice }) {
   const invoiceRef = doc(db, "invoices", invoice.id);
-  return await setDoc(invoiceRef, invoice);
+  return await setDoc(invoiceRef, invoice); 
 }
 
 export async function createDemoInvoice({ userId }) {
@@ -40,6 +40,20 @@ export async function markInvoiceAsPaid({ id }) {
   return await updateDoc(invoiceRef, { status: "paid" });
 }
 
+export async function markInvoiceAsQQQY({ id }) {
+  const invoiceRef = doc(db, "invoices", id);
+  return await updateDoc(invoiceRef, { status: "QQQY" });
+}
+
+export async function markInvoiceAsIWMY({ id }) {
+  const invoiceRef = doc(db, "invoices", id);
+  return await updateDoc(invoiceRef, { status: "IWMY" });
+}
+
+export async function markInvoiceAsJEPY({ id }) {
+  const invoiceRef = doc(db, "invoices", id);
+  return await updateDoc(invoiceRef, { status: "JEPY" });
+}
 export async function deleteInvoice({ id }) {
   const invoiceRef = doc(db, "invoices", id);
   return await deleteDoc(invoiceRef);

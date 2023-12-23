@@ -40,7 +40,7 @@ const total = computed(() => {
   props.items.forEach((item) => {
     total += item.quantity * item.price;
   });
-  return total.toFixed(2) + "$";
+  return  "$" + total.toFixed(2);
 });
 </script>
 

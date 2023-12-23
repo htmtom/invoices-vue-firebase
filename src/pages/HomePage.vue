@@ -7,7 +7,7 @@
       :handleChange="handleChange"
     />
     <brief-message variant="info" v-if="!isAuthenticated">
-      Sign in to start creating your invoices.
+      Sign in to start tracking.
     </brief-message>
 
     <div class="skeleton" v-if="invoices.loading">
@@ -20,7 +20,7 @@
         invoices.data.length == 0 && isAuthenticated && selectedStatus == 'all'
       "
     >
-      Start creating your invoices from new invoice button!
+      Start Here.
     </brief-message>
     <div class="invoices" v-else>
       <transition-group name="fade">

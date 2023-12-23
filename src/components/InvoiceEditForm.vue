@@ -70,6 +70,13 @@
           inputClass="width-30"
         />
         <input-base
+          v-model="data.to.state"
+          label="State"
+          name="state"
+          type="text"
+          inputClass="width-30"
+        />
+        <input-base
           v-model="data.to.postcode"
           label="Postal code"
           name="postcode"

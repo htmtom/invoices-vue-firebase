@@ -19,7 +19,7 @@
   <input
     type="number"
     name="quantity"
-    min="1"
+    
     :value="props.item.quantity"
     class="input"
     @input="
